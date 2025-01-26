@@ -12,6 +12,7 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use(express.json());
 
 
 
@@ -31,9 +32,9 @@ app.get('/home', (req, res) => {
     res.send('<h2>Home Page</h2>');
 })
 
-/////////////////////////
-///////Express Routers/////
-/////////////////////////
+/////////////////////////////
+///////Express Routers///////
+/////////////////////////////
 
 const regionRouter = require('./Routes/regions');
 const trainerRouter = require('./Routes/trainers');

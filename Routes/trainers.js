@@ -7,20 +7,10 @@ router.get('/', (req, res) => {
     res.send(trainers);
 });
 
-// router.get('/:name', (req, res) => {
-//     res.send(`The trainer is ${req.params.name}`);
-// });
+
 
 router.get('/:name', (req, res) => {
-    const links = [
-        {
-          href: `trainers/:name`,
-          rel: ":name",
-          type: "GET",
-        },
-      ];
-  
-      res.json({ trainers, links });
+      res.json(trainers);
 });
 
 router.post('/', (req, res) => {
@@ -32,9 +22,36 @@ router.post('/', (req, res) => {
         hometown: req.body.hometown,
       };
 
-      posts.push(newTrainer);
+      trainers.push(newTrainer);
       res.status(201).json(newTrainer);
     } else next(error(400, "Insufficient Data"));
+  });
+
+  router.patch('/:id',(req, res) => {
+    const trainers = trainers.find((p, i) => {
+      if (p.id == req.params.id) {
+        trainer.name = req.body.name;
+        trainer.age = req.body.age;
+        trainer.hometown = req.body.hometown;
+        
+      }
+    });
+      trainers.push(newTrainer);
+      res.status(201).json(newTrainer);
+  });
+
+
+  router.delete('/:id', (req, res, next) => {
+    const trainers = trainers.find((p, i) => {
+      if (p.id == req.params.id) {
+        trainers.splice(i, 1);
+        return ('Trainer Released')
+      } else {
+        res.status(201).json('Trainer not found');
+        return ('Trainer not found')
+        
+      }
+    });
   });
 
 
